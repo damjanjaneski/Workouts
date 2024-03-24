@@ -5,6 +5,8 @@ import ExerciseListItem from "../../src/components/ExerciseListItem";
 import { useQuery } from "@tanstack/react-query";
 import { gql, request } from "graphql-request";
 
+const exercisesQuery = gql``;
+
 export default function ExercisesScreen() {
   const { data, isLoading } = useQuery({
     queryKey: ["exercises"],

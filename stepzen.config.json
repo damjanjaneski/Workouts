@@ -1,0 +1,4 @@
+{
+  "endpoint": "api/belligerent-turkey",
+  "root": "api/curl"
+}
