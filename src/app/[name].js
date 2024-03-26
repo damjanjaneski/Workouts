@@ -3,14 +3,33 @@ import { useLocalSearchParams } from "expo-router";
 import data from "../../assets/data/exercises.json";
 import { Stack } from "expo-router";
 import { useState } from "react";
+import { gql } from "graphql-request";
+import client from "../graphqlClient";
+import { useQuery } from "@tanstack/react-query";
+import { ActivityIndicator } from "react-native-web";
 
 export default function ExerciseDetailScreen() {
-  const params = useLocalSearchParams();
-  const exercise = data.find((item) => item.name === params.name);
+  const { name } = useLocalSearchParams();
   const [numOfLines, setNumOfLines] = useState({
     more: true,
     less: false,
     lines: 3,
+  });
+
+  const exerciseQuery = gql`
+    query exercises($name: String) {
+      exercises(name: $name) {
+        equipment
+        instructions
+        muscle
+        name
+      }
+    }
+  `;
+
+  const { data, isLoading, error } = useQuery({
+    queryKey: ["exercise", name],
+    queryFn: () => client.request(exerciseQuery, { name }),
   });
 
   const toggle = function () {
@@ -21,6 +40,20 @@ export default function ExerciseDetailScreen() {
       lines: numOfLines.lines === 3 ? 0 : 3,
     }));
   };
+
+  if (isLoading) {
+    return <ActivityIndicator />;
+  }
+
+  if (error) {
+    return <Text>Error fetchin data</Text>;
+  }
+
+  const exercise = data.exercises[0];
+
+  if (!exercise) {
+    return <Text>Exercise not found</Text>;
+  }
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
