@@ -1,18 +1,29 @@
-type Exercise {
-  difficulty: String
-  equipment: String
-  instructions: String
-  muscle: String
-  name: String
-  type: String
+type DocumentsEntry {
+  _id: String
+  exercise: String
+  reps: Int
+  weight: Float
+}
+
+type Root {
+  documents: [DocumentsEntry]
 }
 
 type Query {
-  exercises(muscle: String, name: String): [Exercise]
+  myQuery(
+    collection: String
+    dataSource: String
+    database: String
+  ): [DocumentsEntry]
     @rest(
-      endpoint: "https://api.api-ninjas.com/v1/exercises"
+      method: POST
+      endpoint: "https://eu-central-1.aws.data.mongodb-api.com/app/data-nuhlg/endpoint/data/v1"
       headers: [
-        { name: "x-api-key", value: "gVm3mca3Rz32T18j2Xa07A==h0JPGr49Ha45V5Ax" }
+        { name: "access-control-request-headers", value: "*" }
+        {
+          name: "api-key"
+          value: "rdrJisrgmQozvYQKtK2PvvYcN6aIvJEq3yrWyTmNbxgQOJcC9br45X6JYbhQBdLG"
+        }
       ]
     )
 }

@@ -1,6 +1,5 @@
 import { View, Text, StyleSheet, ScrollView } from "react-native";
 import { useLocalSearchParams } from "expo-router";
-import data from "../../assets/data/exercises.json";
 import { Stack } from "expo-router";
 import { useState } from "react";
 import { gql } from "graphql-request";

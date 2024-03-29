@@ -1,1 +1,2 @@
 curl https://api.api-ninjas.com/v1/exercises?muscle=chest -Headers @{ "X-API-KEY" = "gVm3mca3Rz32T18j2Xa07A==h0JPGr49Ha45V5Ax" } | ConvertFrom-Json
+rdrJisrgmQozvYQKtK2PvvYcN6aIvJEq3yrWyTmNbxgQOJcC9br45X6JYbhQBdLG
